@@ -1,0 +1,6 @@
+streamlit
+google-generativeai
+requests
+pandas
+matplotlib
+/Users/mayam/Downloads/WebDevelopmentLab03/requirements.txt
