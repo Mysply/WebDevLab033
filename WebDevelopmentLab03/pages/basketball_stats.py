@@ -3,21 +3,22 @@ import requests
 from datetime import date
 
 # --- Page Setup ---
-st.set_page_config(page_title="🏀 NBA Player & Team Info", layout="centered")
-st.title("🏀 NBA Player & Team Info (BallDontLie API - Free Tier)")
-player_name = st.sidebar.text_input("Search a Player 🕵🏽‍♂️", "Curry").strip().lower()
+st.set_page_config(page_title="🏀 NBA Player & Team Info", layout="wide")  # Use 'wide' for sidebar space
 
+# --- Sidebar ---
+st.sidebar.title("🔍 Player Search")
+st.sidebar.caption("Powered by BallDontLie API")
+player_name = st.sidebar.text_input("Search a Player (e.g. Curry, Luka, Tatum):", "Curry").strip().lower()
 
-# --- API Key & Headers ---
+# --- Main Page ---
+st.title("🏀 NBA Player & Team Info")
+
+# --- API Setup ---
 API_KEY = "832b9662-fac0-4dbf-878d-f7299f3b3a58"
 HEADERS = {
     "Authorization": API_KEY
 }
 
-# --- Search Bar ---
-player_name = st.text_input("Search a Player (e.g. Curry, Luka, Tatum):", "curry").strip().lower()
-
-# --- Search and Display Info ---
 if player_name:
     url = f"https://api.balldontlie.io/v1/players?search={player_name}"
     response = requests.get(url, headers=HEADERS)
@@ -34,15 +35,15 @@ if player_name:
             st.subheader(full_name)
             st.write("🏀 Team:", team)
             st.write("📍 Position:", player['position'] or "N/A")
-            st.write("📏 Height:", player.get('height', 'N/A'))
-            st.write("⚖️ Weight:", player.get('weight', 'N/A'))
+            st.write("📏 Height:", player.get('height_feet', 'N/A'), "'", player.get('height_inches', 'N/A'))
+            st.write("⚖️ Weight:", player.get('weight_pounds', 'N/A'), "lbs")
 
             # --- Team Games ---
             st.subheader("📅 Recent Team Games")
-            st.caption("These are recent games played by the team — not necessarily games the player was active in.")
+            st.caption("Recent games played by the team — not necessarily the player.")
 
             start_date = "2023-10-01"
-            end_date = date.today().isoformat()  # Always up to today
+            end_date = date.today().isoformat()
 
             games_url = (
                 f"https://api.balldontlie.io/v1/games?"
