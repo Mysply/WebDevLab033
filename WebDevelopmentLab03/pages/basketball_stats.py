@@ -3,7 +3,7 @@ import requests
 from datetime import date
 
 # --- Page Setup ---
-st.set_page_config(page_title="🏀 NBA Player & Team Info", layout="wide")
+st.set_page_config(page_title="🏀 NBA Player & Team Info", layout="centered")
 st.title("🏀 NBA Player & Team Info (BallDontLie API - Free Tier)")
 
 # --- API Key & Headers ---
@@ -12,9 +12,8 @@ HEADERS = {
     "Authorization": API_KEY
 }
 
-# --- Sidebar Player Search ---
-st.sidebar.title("🔍 Player Search")
-player_name = st.sidebar.text_input("Search a Player (e.g. Stephen Curry, Luka Doncic):", "Stephen Curry").strip().lower()
+# --- Search Bar ---
+player_name = st.text_input("Search a Player (e.g. Curry, Luka, Tatum):", "curry").strip().lower()
 
 # --- Search and Display Info ---
 if player_name:
@@ -24,8 +23,7 @@ if player_name:
     if response.status_code == 200:
         data = response.json().get("data", [])
         if data:
-            # Try to find exact match
-            player = next((p for p in data if f"{p['first_name']} {p['last_name']}".lower() == player_name), data[0])
+            player = data[0]  # Just show first match
             full_name = f"{player['first_name']} {player['last_name']}"
             team = player['team']['full_name']
             team_id = player['team']['id']
@@ -33,26 +31,17 @@ if player_name:
             # --- Player Info ---
             st.subheader(full_name)
             st.write("🏀 Team:", team)
-            st.write("📍 Position:", player['position'] if player['position'] else "N/A")
+            st.write("📍 Position:", player['position'] or "N/A")
+            st.write("📏 Height:", player.get('height', 'N/A'))
+            st.write("⚖️ Weight:", player.get('weight', 'N/A'))
 
-            # --- Height ---
-            feet = player.get('height_feet')
-            inches = player.get('height_inches')
-            if feet is not None and inches is not None:
-                st.write("📏 Height:", f"{feet}' {inches}\"")
-            else:
-                st.write("📏 Height:", "N/A")
-
-            # --- Weight ---
-            weight = player.get('weight_pounds')
-            st.write("⚖️ Weight:", f"{weight} lbs" if weight is not None else "N/A")
-
-            # --- Recent Team Games ---
+            # --- Team Games ---
             st.subheader("📅 Recent Team Games")
-            st.caption("Games by the team — not necessarily the player.")
+            st.caption("These are recent games played by the team — not necessarily games the player was active in.")
 
             start_date = "2023-10-01"
-            end_date = date.today().isoformat()
+            end_date = date.today().isoformat()  # Always up to today
+
             games_url = (
                 f"https://api.balldontlie.io/v1/games?"
                 f"team_ids[]={team_id}&start_date={start_date}&end_date={end_date}&per_page=5"
