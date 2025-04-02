@@ -32,11 +32,25 @@ if player_name:
             team_id = player['team']['id']
 
             # --- Player Info ---
+                   
             st.subheader(full_name)
             st.write("🏀 Team:", team)
             st.write("📍 Position:", player['position'] or "N/A")
-            st.write("📏 Height:", player.get('height_feet', 'N/A'), "'", player.get('height_inches', 'N/A'))
-            st.write("⚖️ Weight:", player.get('weight_pounds', 'N/A'), "lbs")
+            
+            # Handle height
+            feet = player.get('height_feet')
+            inches = player.get('height_inches')
+            if feet is not None and inches is not None:
+                st.write("📏 Height:", f"{feet}' {inches}\"")
+            else:
+                st.write("📏 Height: N/A")
+            
+            # Handle weight
+            weight = player.get('weight_pounds')
+            if weight is not None:
+                st.write("⚖️ Weight:", f"{weight} lbs")
+            else:
+                st.write("⚖️ Weight: N/A")
 
             # --- Team Games ---
             st.subheader("📅 Recent Team Games")
