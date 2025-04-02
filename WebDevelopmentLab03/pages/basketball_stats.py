@@ -3,21 +3,19 @@ import requests
 from datetime import date
 
 # --- Page Setup ---
-st.set_page_config(page_title="🏀 NBA Player & Team Info", layout="wide")  # Use 'wide' for sidebar space
+st.set_page_config(page_title="🏀 NBA Player & Team Info", layout="wide")
 
 # --- Sidebar ---
 st.sidebar.title("🔍 Player Search")
-st.sidebar.caption("Powered by BallDontLie API")
-player_name = st.sidebar.text_input("Search a Player (e.g. Curry, Luka, Tatum):", "Curry").strip().lower()
-
-# --- Main Page ---
-st.title("🏀 NBA Player & Team Info")
+player_name = st.sidebar.text_input("Search a Player (e.g. Stephen Curry, Luka Doncic):", "Stephen Curry").strip().lower()
 
 # --- API Setup ---
 API_KEY = "832b9662-fac0-4dbf-878d-f7299f3b3a58"
 HEADERS = {
     "Authorization": API_KEY
 }
+
+st.title("🏀 NBA Player & Team Info")
 
 if player_name:
     url = f"https://api.balldontlie.io/v1/players?search={player_name}"
@@ -26,43 +24,36 @@ if player_name:
     if response.status_code == 200:
         data = response.json().get("data", [])
         if data:
-            player = data[0]  # Just show first match
+            # Find most likely match (check full name match)
+            player = next((p for p in data if f"{p['first_name']} {p['last_name']}".lower() == player_name), data[0])
             full_name = f"{player['first_name']} {player['last_name']}"
             team = player['team']['full_name']
             team_id = player['team']['id']
 
             # --- Player Info ---
-                   
             st.subheader(full_name)
             st.write("🏀 Team:", team)
             st.write("📍 Position:", player['position'] or "N/A")
-            
-            # Handle height
+
+            # --- Height ---
             feet = player.get('height_feet')
             inches = player.get('height_inches')
             if feet is not None and inches is not None:
                 st.write("📏 Height:", f"{feet}' {inches}\"")
             else:
-                st.write("📏 Height: N/A")
-            
-            # Handle weight
-            weight = player.get('weight_pounds')
-            if weight is not None:
-                st.write("⚖️ Weight:", f"{weight} lbs")
-            else:
-                st.write("⚖️ Weight: N/A")
+                st.write("📏 Height:", "N/A")
 
-            # --- Team Games ---
+            # --- Weight ---
+            weight = player.get('weight_pounds')
+            st.write("⚖️ Weight:", f"{weight} lbs" if weight is not None else "N/A")
+
+            # --- Recent Team Games ---
             st.subheader("📅 Recent Team Games")
-            st.caption("Recent games played by the team — not necessarily the player.")
+            st.caption("Games by the team — not necessarily the player.")
 
             start_date = "2023-10-01"
             end_date = date.today().isoformat()
-
-            games_url = (
-                f"https://api.balldontlie.io/v1/games?"
-                f"team_ids[]={team_id}&start_date={start_date}&end_date={end_date}&per_page=5"
-            )
+            games_url = f"https://api.balldontlie.io/v1/games?team_ids[]={team_id}&start_date={start_date}&end_date={end_date}&per_page=5"
             games_response = requests.get(games_url, headers=HEADERS)
             games = games_response.json().get("data", [])
 
@@ -71,12 +62,10 @@ if player_name:
                     game_date = g['date'].split("T")[0]
                     home = g['home_team']
                     visitor = g['visitor_team']
-                    st.markdown(
-                        f"**{game_date}** — {home['full_name']} {g['home_team_score']} vs {visitor['full_name']} {g['visitor_team_score']}"
-                    )
+                    st.markdown(f"**{game_date}** — {home['full_name']} {g['home_team_score']} vs {visitor['full_name']} {g['visitor_team_score']}")
             else:
-                st.warning("No recent games found for this team.")
+                st.warning("No recent games found.")
         else:
             st.warning("No players found with that name.")
     else:
-        st.error("Something went wrong. Check your API key or try again later.")
+        st.error("API error. Check your key or try again later.")
