@@ -5,6 +5,8 @@ from datetime import date
 # --- Page Setup ---
 st.set_page_config(page_title="🏀 NBA Player & Team Info", layout="centered")
 st.title("🏀 NBA Player & Team Info (BallDontLie API - Free Tier)")
+player_name = st.sidebar.text_input("Search a Player 🕵🏽‍♂️", "Curry").strip().lower()
+
 
 # --- API Key & Headers ---
 API_KEY = "832b9662-fac0-4dbf-878d-f7299f3b3a58"
