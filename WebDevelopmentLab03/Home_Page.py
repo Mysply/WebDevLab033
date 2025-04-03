@@ -34,7 +34,7 @@ Welcome to our NBA Stats App! Use the sidebar to explore:
 
 ---
 
-#how to use 
+### 🧠 How To Use It
 1. Start typing a player's name in the search bar (e.g. `tatum`, `morant`)
 2. Select a player and view their info
 3. Scroll to see the 5 most recent games played by their team
