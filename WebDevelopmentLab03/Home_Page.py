@@ -1,9 +1,10 @@
 import streamlit as st
+from PIL import Image
 
-# PAGE CONFIGURATION 
+# --- PAGE CONFIGURATION (must be first Streamlit command) ---
 st.set_page_config(page_title="Web Development Lab03", page_icon="🏀", layout="wide")
 
-# PAGE STYLING 
+# --- PAGE STYLING ---
 st.markdown(
     """
     <style>
@@ -15,25 +16,17 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-#PAGE CONTENT
+# --- PAGE CONTENT ---
 st.title("Web Development Lab03")
 st.header("CS 1301")
 st.subheader("Team Maya and William, Web Development - Section B")
 st.subheader("🏀William Alvarez, Maya Matthews🏀")
 
-import streamlit as st
-from PIL import Image
-
-st.set_page_config(page_title="👑 LeBron Viewer", layout="centered")
-st.title("🏀 Web Development Lab 03")
-st.header("👑 LeBron James – Player Photo")
-
-# Load and display image (no try/except)
+# --- DISPLAY IMAGE ---
 image = Image.open("lebron.jpeg")
 st.image(image, caption="King James in Action", use_column_width=True)
 
-
-# INTRODUCTION 
+# --- INTRODUCTION ---
 st.write("""
 Welcome to our Streamlit Web Development Lab03 app! You can navigate between the pages using the sidebar to the left. The following pages are:
 
@@ -43,7 +36,7 @@ Welcome to our Streamlit Web Development Lab03 app! You can navigate between the
 4. **🏀NBA StatBot**: The StatBot will be able to create responses based on NBA statistics to have a conversation with the user.
 """)
 
-# --- USER INPUT ---
+# --- USER INTERACTION ---
 favoritePlayer = st.text_input("Who is your favorite NBA player?")
 if favoritePlayer:
     st.write(f"Nice choice! {favoritePlayer} is an all-time great!")
