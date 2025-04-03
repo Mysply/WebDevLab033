@@ -23,11 +23,13 @@ st.subheader("Team Maya and William, Web Development - Section B")
 st.subheader("🏀William Alvarez, Maya Matthews🏀")
 
 #  LOAD IMAGE 
-image_path = "images/lebronn.jpeg"
-if os.path.exists(image_path):
-    st.image(image_path)
-else:
-    st.warning("Image not found! Please make sure 'lebron.jpg' is in the 'images' folder.")
+from PIL import Image
+# Display image
+try:
+    image = Image.open("lebronn.jpeg")
+    st.image(image, caption="King James in Action", use_column_width=True)
+except FileNotFoundError:
+    st.error("Image file 'lebronn.jpeg' not found. Make sure it's in the same folder.")
 
 # INTRODUCTION 
 st.write("""
