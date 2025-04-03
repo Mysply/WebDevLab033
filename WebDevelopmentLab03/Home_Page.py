@@ -1,6 +1,6 @@
 import streamlit as st
 
-# --- PAGE CONFIGURATION (must be first Streamlit command) ---
+# page config
 st.set_page_config(page_title="Web Development Lab03", page_icon="🏀", layout="wide")
 
 # --- PAGE STYLING ---
@@ -15,7 +15,7 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# --- PAGE CONTENT ---
+# pages
 st.title("🏀 Web Development Lab03: NBA Team & Player Info")
 st.header("📚 CS 1301 – Group 14, Section B")
 st.subheader("Team Members: William Alvarez & Maya Matthews")
@@ -34,13 +34,23 @@ Welcome to our NBA Stats App! Use the sidebar to explore:
 
 ---
 
-### 🧠 How To Use It
+#how to use 
 1. Start typing a player's name in the search bar (e.g. `tatum`, `morant`)
 2. Select a player and view their info
 3. Scroll to see the 5 most recent games played by their team
 """)
 
-# --- USER INTERACTION ---
+#pages
+st.markdown("""
+### 🗂️ Pages Breakdown
+
+1. **🏠 Home Page** – You're here! This is the welcome page with project info and navigation guidance.
+2. **📊 Basketball Data Retrieval** – Search a player and see their current team and team’s recent games.
+3. **🤖 Gemini Assisted Data** – Uses AI to give suggestions or generate player content based on input.
+4. **🧠 NBA StatBot** – A chatbot-style page that answers NBA-related questions using basic logic and stats.
+""")
+
+# user interaction
 favoritePlayer = st.text_input("Who's your favorite NBA player?")
 if favoritePlayer:
     st.success(f"Nice choice! {favoritePlayer} is a legend. 🏀🔥")
