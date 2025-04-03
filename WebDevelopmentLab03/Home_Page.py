@@ -25,7 +25,7 @@ st.subheader("🏀William Alvarez, Maya Matthews🏀")
 from PIL import Image
 # Display image
 try:
-    image = Image.open("lebronn.jpeg")
+    image = Image.open("lebron.jpeg")
     st.image(image, caption="King James in Action", use_column_width=True)
 except FileNotFoundError:
     st.error("Image file 'lebronn.jpeg' not found. Make sure it's in the same folder.")
