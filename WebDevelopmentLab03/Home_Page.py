@@ -23,7 +23,7 @@ st.subheader("Team Maya and William, Web Development - Section B")
 st.subheader("🏀William Alvarez, Maya Matthews🏀")
 
 #  LOAD IMAGE 
-image_path = "images/lebron.jpeg"
+image_path = "images/lebronn.jpeg"
 if os.path.exists(image_path):
     st.image(image_path)
 else:
