@@ -3,7 +3,7 @@ import streamlit as st
 # page config
 st.set_page_config(page_title="Web Development Lab03", page_icon="🏀", layout="wide")
 
-# --- PAGE STYLING ---
+# page styling
 st.markdown(
     """
     <style>
@@ -20,7 +20,7 @@ st.title("🏀 Web Development Lab03: NBA Team & Player Info")
 st.header("📚 CS 1301 – Group 14, Section B")
 st.subheader("Team Members: William Alvarez & Maya Matthews")
 
-# --- INTRODUCTION ---
+# intro
 st.markdown("""
 ### 📌 What This App Can Do
 Welcome to our NBA Stats App! Use the sidebar to explore:
@@ -28,9 +28,9 @@ Welcome to our NBA Stats App! Use the sidebar to explore:
 - 🏀 **Player & Team Info**  
   Search for an NBA player (like Curry or Luka)  
   See their current team, height, and position  
-  View recent games played by their team  
+  View recent games played by their team !  
 
-- ⚠️ _Note_: This app uses the free tier of the BallDontLie API, which includes **team-based game data only up to the 2022–2023 season**. Player stats are not available with this tier.
+- ⚠️ _Side Note_: This app uses the free tier of the BallDontLie API, which includes **team-based game data only up to the 2022–2023 season**. Player stats are not available with this tier.
 
 ---
 
