@@ -27,8 +27,6 @@ from PIL import Image
 try:
     image = Image.open("lebron.jpeg")
     st.image(image, caption="King James in Action", use_column_width=True)
-except FileNotFoundError:
-    st.error("Image file 'lebronn.jpeg' not found. Make sure it's in the same folder.")
 
 # INTRODUCTION 
 st.write("""
