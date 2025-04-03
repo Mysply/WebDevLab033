@@ -1,5 +1,4 @@
 import streamlit as st
-from PIL import Image
 
 # --- PAGE CONFIGURATION (must be first Streamlit command) ---
 st.set_page_config(page_title="Web Development Lab03", page_icon="🏀", layout="wide")
@@ -17,26 +16,31 @@ st.markdown(
 )
 
 # --- PAGE CONTENT ---
-st.title("Web Development Lab03")
-st.header("CS 1301")
-st.subheader("Team Maya and William, Web Development - Section B")
-st.subheader("🏀William Alvarez, Maya Matthews🏀")
-
-# --- DISPLAY IMAGE ---
-image = Image.open("lebron.jpeg")
-st.image(image, caption="King James in Action", use_column_width=True)
+st.title("🏀 Web Development Lab03: NBA Team & Player Info")
+st.header("📚 CS 1301 – Group 14, Section B")
+st.subheader("Team Members: William Alvarez & Maya Matthews")
 
 # --- INTRODUCTION ---
-st.write("""
-Welcome to our Streamlit Web Development Lab03 app! You can navigate between the pages using the sidebar to the left. The following pages are:
+st.markdown("""
+### 📌 What This App Can Do
+Welcome to our NBA Stats App! Use the sidebar to explore:
 
-1. **🏀Home Page**: Use this page to navigate to other pages and find descriptions on what the App can do!
-2. **🏀Basketball Data Retrieval**: This page retrieves and displays data from the NBA. Just type in a player name and let it work.
-3. **🏀Gemini Assisted Data**: Gemini helps in curating functional data based on user inputs.
-4. **🏀NBA StatBot**: The StatBot will be able to create responses based on NBA statistics to have a conversation with the user.
+- 🏀 **Player & Team Info**  
+  Search for an NBA player (like Curry or Luka)  
+  See their current team, height, and position  
+  View recent games played by their team  
+
+- ⚠️ _Note_: This app uses the free tier of the BallDontLie API, which includes **team-based game data only up to the 2022–2023 season**. Player stats are not available with this tier.
+
+---
+
+### 🧠 How To Use It
+1. Start typing a player's name in the search bar (e.g. `tatum`, `morant`)
+2. Select a player and view their info
+3. Scroll to see the 5 most recent games played by their team
 """)
 
 # --- USER INTERACTION ---
-favoritePlayer = st.text_input("Who is your favorite NBA player?")
+favoritePlayer = st.text_input("Who's your favorite NBA player?")
 if favoritePlayer:
-    st.write(f"Nice choice! {favoritePlayer} is an all-time great!")
+    st.success(f"Nice choice! {favoritePlayer} is a legend. 🏀🔥")
