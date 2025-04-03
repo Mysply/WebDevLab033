@@ -21,12 +21,17 @@ st.header("CS 1301")
 st.subheader("Team Maya and William, Web Development - Section B")
 st.subheader("🏀William Alvarez, Maya Matthews🏀")
 
-#  LOAD IMAGE 
+import streamlit as st
 from PIL import Image
-# Display image
-try:
-    image = Image.open("lebron.jpeg")
-    st.image(image, caption="King James in Action", use_column_width=True)
+
+st.set_page_config(page_title="👑 LeBron Viewer", layout="centered")
+st.title("🏀 Web Development Lab 03")
+st.header("👑 LeBron James – Player Photo")
+
+# Load and display image (no try/except)
+image = Image.open("lebron.jpeg")
+st.image(image, caption="King James in Action", use_column_width=True)
+
 
 # INTRODUCTION 
 st.write("""
