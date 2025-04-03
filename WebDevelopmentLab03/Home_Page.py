@@ -1,5 +1,4 @@
 import streamlit as st
-import os
 
 # PAGE CONFIGURATION 
 st.set_page_config(page_title="Web Development Lab03", page_icon="🏀", layout="wide")
