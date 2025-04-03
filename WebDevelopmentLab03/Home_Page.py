@@ -1,57 +1,47 @@
 import streamlit as st
 
+# Title of App
+st.title("Web Development Lab03")
 
+# Assignment Data
+# TODO: Fill out your team number, section, and team members
 
-# --- Page Config ---
-st.set_page_config(page_title="🏀 NBA Stats Hub", layout="centered")
+st.markdown(
+    """
+    <style>
+        .stApp {
+            background-color: #FFE599;
+        }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 
-# --- Header ---
-st.title("🏀 Web Development Lab 03: NBA Team & Player Info")
-st.markdown("**Powered by [BallDontLie API](https://www.balldontlie.io/)** (Free Tier)")
+st.header("CS 1301")
+st.subheader("Team Maya and William, Web Development - Section B")
+st.subheader("🏀William Alvarez, Maya Matthews🏀")
 
-# --- Team Info ---
-st.markdown("""
-### 📚 CS 1301 – Team XX, Section X  
-**Team Members:**  
-- Team Member 1  
-- Team Member 2
+st.image("images/lebron.jpg")
+
+# Introduction
+# TODO: Write a quick description for all of your pages in this lab below, in the form:
+#       1. **Page Name**: Description
+#       2. **Page Name**: Description
+#       3. **Page Name**: Description
+#       4. **Page Name**: Description
+
+st.write("""
+Welcome to our Streamlit Web Development Lab03 app! You can navigate between the pages using the sidebar to the left. The following pages are:
+
+1. **🏀Home Page**: Use this page to navigate to other pages and find descriptions on what the App can do!
+2. **🏀Basketball Data Retrieval**: This page retrieves and displays data from the NBA. Just type in a player name and let it work.
+3. **🏀Gemini Assisted Data**: Gemini helps in curating functional data based on user inputs.
+4. **🏀NBA StatBot**: The StatBot will be able to created responses based on NBA statistics to have a conversation with the user.
+
 """)
 
-# --- What This App Does ---
-st.markdown("""
-### 📌 What This App Can Do
+favoritePlayer = st.text_input("Who is your favorite NBA player?")
+if favoritePlayer:
+    st.write(f"Nice choice! {favoritePlayer} is an all time great!")
 
-Welcome to our NBA Stats App! Use the sidebar to explore:
 
-- 🏀 **Player & Team Info**
-  - Search for an NBA player (like **Curry** or **Luka**)
-  - See their **current team**, **height**, and **position**
-  - View **recent games played by their team**
-
-⚠️ **Note:** This app uses the free tier of the BallDontLie API, so game stats are **team-based**, not player-specific.
-""")
-
-# --- Season Info ---
-st.markdown("""
-### 📅 Season Info
-
-This app displays games and stats from the **2022–2023 NBA season** only.
-
-> 🗓️ **Why only 2022–2023?**  
-We're using the **free tier** of the BallDon'tLie API, which only provides data up to the **22–23 season**.  
-Live or future data (like 2024–25 stats) requires a premium API or another source.
-""")
-
-# --- How To Use It ---
-st.markdown("""
-### 🧠 How To Use It
-
-1. Start typing a player's name in the search bar (e.g. `"tatum"`, `"morant"`)
-2. Select a player and view their info
-3. Scroll to see the **5 most recent games** played by their team  
-4. Use the sidebar on the left to get started →
-""")
-
-# Optional button
-if st.button("Go to Player Search"):
-    st.info("Use the sidebar to click into the 'NBA Stats Viewer' page.")
